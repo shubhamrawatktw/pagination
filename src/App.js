@@ -10,6 +10,26 @@ function App() {
     setValue(index)
   }
 
+ 
+  const handleNext= ()=>{
+   setValue((oldValue)=>{
+     let newValue = oldValue + 1
+     if (newValue > data.length-1) {
+        newValue = 0
+     }
+    return newValue
+   })
+  }
+  const handlePrev= ()=>{
+   setValue((oldValue)=>{
+     let newValue = oldValue - 1
+     if (newValue < 0) {
+        newValue = data.length -1 
+     }
+    return newValue
+   })
+  }
+
   useEffect(() => {
     if (loading) {
       return;
@@ -31,6 +51,7 @@ function App() {
         </div>
        {
          !loading &&(<div className="btn-container">
+         <button className="prev-btn" onClick={handlePrev}>prev </button>
           {data.map((item,index)=>{
             return <button 
             key={index} 
@@ -41,6 +62,7 @@ function App() {
             {index + 1}
             </button>
           })}
+          <button className="next-btn" onClick={handleNext}>next </button>
         </div>)
        } 
       </section>
